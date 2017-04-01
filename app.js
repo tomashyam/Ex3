@@ -24,7 +24,7 @@ function MenuSearchService($http){
             return found;
         }
         userFilter = userFilter.trim();
-        for(i=0;i<data.menu_items.length;i++){
+        for(var i=0;i<data.menu_items.length;i++){
             if (data.menu_items[i].description.indexOf(userFilter) != -1){
                 found.push(data.menu_items[i]);
             };

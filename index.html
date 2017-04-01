@@ -8,8 +8,8 @@
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
   </head>
-<body>
-   <div class="container" ng-controller="narrowItDownController as items">
+<body ng-controller="narrowItDownController as items">
+   <div class="container" >
     <h1>Narrow Down Your Chinese Menu Choice</h1>
 
     <div class="form-group">
@@ -20,7 +20,8 @@
     </div>
     
     <!-- found-items should be implemented as a component -->
-    <found-items items="items.found" on-remove="items.removeItem(index)"></found-items>
+    
   </div>
+  <found-items items="items.found" on-remove="items.removeItem(index)"></found-items>
 </body>
 </html>

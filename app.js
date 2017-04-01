@@ -1,6 +1,7 @@
+(function () {
+'use strict';
 var narrowItDownApp = angular.module("NarrowItDownApp",[])
     .controller("narrowItDownController", narrowItDownController)
-    //.controller("foundItemController", foundItemController)
     .directive("foundItems",foundItems)
     .service("MenuSearchService", MenuSearchService)
     
@@ -19,6 +20,10 @@ function MenuSearchService($http){
 
     function getOnlyWantedData(data,userFilter){
         var found = [];
+        if (!userFilter || userFilter.length == 0) {
+            return found;
+        }
+        userFilter = userFilter.trim();
         for(i=0;i<data.menu_items.length;i++){
             if (data.menu_items[i].description.indexOf(userFilter) != -1){
                 found.push(data.menu_items[i]);
@@ -47,7 +52,7 @@ function narrowItDownController(MenuSearchService){
 
 function foundItems(){
     return foundItems = {
-        template : '<div><ul><li ng-repeat="item in items">{{item.name}}' +
+        template : '<div><ul><li ng-repeat="item in items">{{item.name}} ,{{item.short_name}}, {{item.description}}' +
         '<button class="btn btn-danger" ng-click="remove({index: $index})">Don\'t want this one</button></li></ul>'+
         '<label class="error">Nothing found</label></div>',
         link : foundItemDirectiveLink,
@@ -79,4 +84,4 @@ function foundItemDirectiveLink (scope, element, attrs, controller) {
  }
     });
 }
-
+})();
